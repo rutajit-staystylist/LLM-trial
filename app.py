@@ -27,6 +27,7 @@ def call_finetuned_gpt(prompt, model="ft:gpt-3.5-turbo-0613:personal:dress-new:9
 
 # Streamlit app
 st.title("AI-Stylist LLM Trial")
+st.subheader('Prompt Format')
 st.markdown('Body Shape: <Body Shape>, Occasion:<Occasion Type>, Category: Dress. Recommend Multiple and most appropriate  and unique meta attributes (atleast 3 combination) of Dress ayttributes for each of the following: Length, Pattern, Neck, Print, Shape, Sleeve length, Sleeve styling.')
 # Input from user
 user_input = st.chat_input('Enter your Prompt')
