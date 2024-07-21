@@ -1,16 +1,11 @@
 import streamlit as st
 import requests
-from dotenv import load_dotenv
-import os
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Function to call the fine-tuned GPT-3.5 model
 def call_finetuned_gpt(prompt, model="ft:gpt-3.5-turbo-0613:personal:dress-new:9lkuyaVt"):
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {os.getenv('OPENAI_API_KEY')}"
+        "Authorization": f"Bearer {st.secrets['openai']['api_key']}"
     }
     
     data = {
@@ -23,7 +18,15 @@ def call_finetuned_gpt(prompt, model="ft:gpt-3.5-turbo-0613:personal:dress-new:9
     
     response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=data)
     response_json = response.json()
-    return response_json["choices"][0]["message"]["content"]
+
+    # Debugging: Log the entire response
+    st.write(response_json)
+
+    # Check if the response contains the expected structure
+    if "choices" in response_json and len(response_json["choices"]) > 0 and "message" in response_json["choices"][0]:
+        return response_json["choices"][0]["message"]["content"]
+    else:
+        return "Error: Unexpected response format. Please try again."
 
 # Streamlit app
 st.title("AI-Stylist LLM Trial")
@@ -37,7 +40,9 @@ if user_input:
         response = call_finetuned_gpt(user_input)
         st.write(f"{response}")
 
-
 # Check if API key is loaded
-if os.getenv('OPENAI_API_KEY') is None:
-    st.warning("Please set your OpenAI API key in a .env file.")
+if 'api_key' not in st.secrets['openai']:
+    st.warning("Please set your OpenAI API key in the secrets file.")
+else:
+    st.success("API key loaded successfully.")
+
