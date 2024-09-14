@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Function to call the fine-tuned GPT-3.5 model
-def call_finetuned_gpt(prompt, model="ft:gpt-3.5-turbo-0613:personal:dress-new:9lkuyaVt"):
+def call_finetuned_gpt(prompt, model="ft:gpt-4o-2024-08-06:personal:dress-gpt4-new:A6kjHO1g"):
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {st.secrets['openai']['api_key']}"
