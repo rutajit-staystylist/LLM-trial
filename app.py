@@ -31,7 +31,7 @@ def call_finetuned_gpt(prompt, model="ft:gpt-4o-2024-08-06:personal:dress-gpt4-n
 # Streamlit app
 st.title("AI-Stylist LLM Trial")
 st.subheader('Prompt Format')
-st.markdown('Body Shape:<Body Shape> , Occasion:<Occassion>, Category: Dress. Recommend Multiple and most appropriate and unique meta attributes (at least 10 combinations ) of Dress attributes for each of the following Output Format: Dress 1 -Length, Pattern, Neck, Print, Shape, Sleeve length, Sleeve styling.')
+st.markdown('Body Shape:<Body Shape> , Occasion:<Occassion>, Category: Dress. Suggest at least   5  meta attributes  examples for each of the following -Length, Pattern, Neck, Print,  Shape, Sleeve length, Sleeve styling. OUTPUT FORMAT{ Length: 5 ATTRIBUTES, Pattern: 5 attributes and so on..}')
 # Input from user
 user_input = st.chat_input('Enter your Prompt')
 
